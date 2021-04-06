@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import { Authenticator } from 'aws-amplify-react'
+import { IAuthenticatorProps } from 'aws-amplify-react/lib-esm/Auth/Authenticator'
+
+import Base from './Base'
 
 function App() {
+  const AlwaysOn = (props: IAuthenticatorProps) => {
+    return (
+      <div>
+        <div>
+          I am always here to show current auth state: {props.authState}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Authenticator hideDefault={true}>
+          <Base />
+          <AlwaysOn />
+        </Authenticator>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
